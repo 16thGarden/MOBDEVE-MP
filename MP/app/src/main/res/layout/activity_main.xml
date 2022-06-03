@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".MainActivity"
+	android:orientation="vertical"
+	android:gravity="center">
+
+	<TextView
+		android:id="@+id/title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:text="Checkers!"
+		android:gravity="center"
+		android:textSize="40sp"
+
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"/>
+
+	<Button
+		android:id="@+id/start_game"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:text="Start Game"
+
+		app:layout_constraintTop_toBottomOf="@+id/title"
+		app:layout_constraintLeft_toLeftOf="parent"
+		/>
+
+	<Button
+		android:id="@+id/continue_game"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:text="Continue Game"
+
+		app:layout_constraintTop_toBottomOf="@+id/start_game"
+		app:layout_constraintLeft_toLeftOf="parent"
+		/>
+
+	<Button
+		android:id="@+id/view_statistics"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:text="View Statistics"
+
+		app:layout_constraintTop_toBottomOf="@+id/continue_game"
+		app:layout_constraintLeft_toLeftOf="parent"
+		/>
+
+</LinearLayout>
