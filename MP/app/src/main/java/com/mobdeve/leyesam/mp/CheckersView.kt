@@ -154,7 +154,7 @@ class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attr
     }
     private fun safeDrawHighlightAndCapture(row: Int, col: Int, rowCapture: Int, colCapture: Int) {
         if (!outOfBounds(rowCapture, colCapture) && !outOfBounds(row, col)) {
-            if (board[rowCapture][colCapture] == notTurn || board[rowCapture][colCapture] == (notTurn + 2)) {
+            if (board[rowCapture][colCapture] == notTurn || board[rowCapture][colCapture] == (notTurn + 2)) { //(notTurn + 2) should be + 1? since Turn values are 1 and 2)
                 if (board[row][col] == 0) {
                     drawHighlight(row, col)
                     drawHighlightCapture(rowCapture, colCapture)
