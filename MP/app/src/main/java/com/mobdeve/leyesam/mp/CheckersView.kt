@@ -32,6 +32,14 @@ class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attr
 
     private var gameover = false
 
+    private val whitePieceBitmap = BitmapFactory.decodeResource(resources, R.drawable.white_piece)
+    private val blackPieceBitMap = BitmapFactory.decodeResource(resources, R.drawable.black_piece)
+    private val whiteKingPieceBitMap = BitmapFactory.decodeResource(resources, R.drawable.white_king_piece)
+    private val blackKingPieceBitMap = BitmapFactory.decodeResource(resources, R.drawable.black_king_piece)
+    private val trophyBitMap = BitmapFactory.decodeResource(resources, R.drawable.trophy)
+    private val highlightBitMap = BitmapFactory.decodeResource(resources, R.drawable.highlight)
+    private val highlightCaptureBitMap = BitmapFactory.decodeResource(resources, R.drawable.highlight_capture)
+
     fun setBoard(board: Array<IntArray>) {
         this.board = board
     }
@@ -62,6 +70,9 @@ class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attr
 
         drawBoard()
         drawPieces()
+        if (!srcMode) {
+            drawHighlights()
+        }
         if (gameover) {
             drawTrophy()
         }
@@ -81,10 +92,6 @@ class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attr
     }
     private fun drawPieces() {
         val paint = Paint()
-        val whitePieceBitmap = BitmapFactory.decodeResource(resources, R.drawable.white_piece)
-        val blackPieceBitMap = BitmapFactory.decodeResource(resources, R.drawable.black_piece)
-        val whiteKingPieceBitMap = BitmapFactory.decodeResource(resources, R.drawable.white_king_piece)
-        val blackKingPieceBitMap = BitmapFactory.decodeResource(resources, R.drawable.black_king_piece)
 
         for (i in 0..7) {
             for (j in 0..7) {
@@ -110,13 +117,115 @@ class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attr
     }
     private fun drawTrophy() {
         val paint = Paint()
-        val trophyBitMap = BitmapFactory.decodeResource(resources, R.drawable.trophy)
         val left = 150
         val top = 150
         val right = width - 150
         val bottom = height - 150
         val rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
         canvas?.drawBitmap(trophyBitMap, null, rect, paint)
+    }
+    private fun drawHighlight(row: Int, col: Int) {
+        if (board[row][col] == 0) {
+            val paint = Paint()
+            val left = col * squareWidth
+            val top = row * squareHeight
+            val right = (col + 1) * squareWidth
+            val bottom = (row + 1) * squareWidth
+            val rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
+            canvas?.drawBitmap(highlightBitMap, null, rect, paint)
+        }
+    }
+    private fun drawHighlightCapture(row: Int, col: Int) {
+        val paint = Paint()
+        val left = col * squareWidth
+        val top = row * squareHeight
+        val right = (col + 1) * squareWidth
+        val bottom = (row + 1) * squareWidth
+        val rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
+        canvas?.drawBitmap(highlightCaptureBitMap, null, rect, paint)
+    }
+    private fun outOfBounds(row: Int, col: Int): Boolean {
+        return row < 0 || row > 7 || col < 0 || col > 7
+    }
+    private fun safeDrawHighlight(row: Int, col: Int) {
+        if (!outOfBounds(row, col)) {
+            drawHighlight(row, col)
+        }
+    }
+    private fun safeDrawHighlightAndCapture(row: Int, col: Int, rowCapture: Int, colCapture: Int) {
+        if (!outOfBounds(rowCapture, colCapture) && !outOfBounds(row, col)) {
+            if (board[rowCapture][colCapture] == notTurn || board[rowCapture][colCapture] == (notTurn + 2)) {
+                if (board[row][col] == 0) {
+                    drawHighlight(row, col)
+                    drawHighlightCapture(rowCapture, colCapture)
+                }
+            }
+        }
+    }
+    private fun drawHighlights() {
+        var row = 0
+        var col = 0
+        var rowCapture = 0
+        var colCapture = 0
+        if (board[srcRow][srcCol] == 3 || board[srcRow][srcCol] == 4) {
+            if (board[srcRow][srcCol] == turn + 2) {
+                row = srcRow - 1
+                col = srcCol - 1
+                safeDrawHighlight(row, col)
+
+                row = srcRow - 1
+                col = srcCol + 1
+                safeDrawHighlight(row, col)
+
+                row = srcRow + 1
+                col = srcCol - 1
+                safeDrawHighlight(row, col)
+
+                row = srcRow + 1
+                col = srcCol + 1
+                safeDrawHighlight(row, col)
+            }
+        } else if (turn == 1) {
+            row = srcRow - 1
+            col = srcCol - 1
+            safeDrawHighlight(row, col)
+
+            row = srcRow - 1
+            col = srcCol + 1
+            safeDrawHighlight(row, col)
+        } else {
+            row = srcRow + 1
+            col = srcCol - 1
+            safeDrawHighlight(row, col)
+
+            row = srcRow + 1
+            col = srcCol + 1
+            safeDrawHighlight(row, col)
+        }
+
+        rowCapture = srcRow - 1
+        colCapture = srcCol - 1
+        row = srcRow - 2
+        col = srcCol - 2
+        safeDrawHighlightAndCapture(row, col, rowCapture, colCapture)
+
+        rowCapture = srcRow - 1
+        colCapture = srcCol + 1
+        row = srcRow - 2
+        col = srcCol + 2
+        safeDrawHighlightAndCapture(row, col, rowCapture, colCapture)
+
+        rowCapture = srcRow + 1
+        colCapture = srcCol - 1
+        row = srcRow + 2
+        col = srcCol - 2
+        safeDrawHighlightAndCapture(row, col, rowCapture, colCapture)
+
+        rowCapture = srcRow + 1
+        colCapture = srcCol + 1
+        row = srcRow + 2
+        col = srcCol + 2
+        safeDrawHighlightAndCapture(row, col, rowCapture, colCapture)
     }
 
     private fun movePiece() {
@@ -146,6 +255,8 @@ class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attr
                         srcRow = row
                         srcCol = col
                         srcMode = false
+
+                        invalidate()
                     } else {
                         desRow = row
                         desCol = col
