@@ -32,7 +32,7 @@ class GameActivity : AppCompatActivity() {
         val checkersView = findViewById<CheckersView>(R.id.checkers_view)
         val title = findViewById<TextView>(R.id.title);
         checkersView.setTitle(title);
-        /*
+
         val row1 = intArrayOf(0, 2, 0, 2, 0, 2, 0, 2)
         val row2 = intArrayOf(2, 0, 2, 0, 2, 0, 2, 0)
         val row3 = intArrayOf(0, 2, 0, 2, 0, 2, 0, 2)
@@ -43,7 +43,6 @@ class GameActivity : AppCompatActivity() {
         val row8 = intArrayOf(1, 0, 1, 0, 1, 0, 1, 0)
         val board = arrayOf(row1, row2, row3, row4, row5, row6, row7, row8)
 
-         */
         /*
         val row1 = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0)
         val row2 = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0)
@@ -56,7 +55,7 @@ class GameActivity : AppCompatActivity() {
         val board = arrayOf(row1, row2, row3, row4, row5, row6, row7, row8)
 
          */
-
+        /*
         val row1 = intArrayOf(0, 2, 0, 2, 0, 2, 0, 2)
         val row2 = intArrayOf(2, 0, 2, 0, 2, 0, 2, 0)
         val row3 = intArrayOf(0, 2, 0, 2, 0, 2, 0, 2)
@@ -66,6 +65,8 @@ class GameActivity : AppCompatActivity() {
         val row7 = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0)
         val row8 = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0)
         val board = arrayOf(row1, row2, row3, row4, row5, row6, row7, row8)
+
+         */
 
         checkersView.setBoard(board)
     }
