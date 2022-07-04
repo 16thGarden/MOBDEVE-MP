@@ -87,5 +87,9 @@ class GameActivity : AppCompatActivity() {
          */
 
         checkersView.setBoard(board)
+
+        var helper = MyDBHelper(applicationContext)
+        var db = helper.readableDatabase
+        checkersView.setDB(db)
     }
 }

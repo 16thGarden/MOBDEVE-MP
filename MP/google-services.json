@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "731909036109",
+    "project_id": "mobdeve-mp-24498",
+    "storage_bucket": "mobdeve-mp-24498.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731909036109:android:e86003160c0d289f78a404",
+        "android_client_info": {
+          "package_name": "com.mobdeve.leyesam.mp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731909036109-8nkmi390ql2fce84bd7fbd0dklvr9m4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOQ8hbDtekMr6lNkXxTAzfj-8ebrVth04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731909036109-8nkmi390ql2fce84bd7fbd0dklvr9m4u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,7 +2,9 @@ package com.mobdeve.leyesam.mp
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.*
+import android.media.MediaPlayer
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -16,6 +18,10 @@ private const val TAG = "GameActivity"
 class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     private var board = arrayOf<IntArray>()
     private var title: TextView? = null
+    private var db: SQLiteDatabase? = null
+
+    private var playerUp = MediaPlayer.create(context, R.raw.up)
+    private var playerDown = MediaPlayer.create(context, R.raw.down)
 
     private var canvas: Canvas? = null
     private var margin = 12
@@ -45,6 +51,9 @@ class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attr
     }
     fun setTitle(title: TextView) {
         this.title = title
+    }
+    fun setDB(db: SQLiteDatabase) {
+        this.db = db
     }
 
     private fun logBoard() {
@@ -252,12 +261,16 @@ class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attr
                     val col = (event.x / squareWidth).toInt()
 
                     if (srcMode) {
+                        playerUp.start()
+
                         srcRow = row
                         srcCol = col
                         srcMode = false
 
                         invalidate()
                     } else {
+                        playerDown.start()
+
                         desRow = row
                         desCol = col
                         srcMode = true
@@ -316,6 +329,28 @@ class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attr
                                 val winner = if (whitePieceCount == 0) 2 else 1
                                 val message = if (winner == 1) "White Player Wins!" else "Black Player Wins!"
                                 title!!.text = message
+
+                                val result = db?.rawQuery("SELECT * FROM statistics", null)
+                                var gamesPlayed: String = "0"
+                                var whiteWins: String = "0"
+                                var blackWins: String = "0"
+                                var draws: String = "0"
+                                if (result!!.moveToLast()) {
+                                    gamesPlayed = result.getString(0)
+                                    whiteWins = result.getString(1)
+                                    blackWins = result.getString(2)
+                                    draws = result.getString(3)
+                                }
+
+                                gamesPlayed = (Integer.parseInt(gamesPlayed) + 1).toString()
+                                if (winner == 1) {
+                                    whiteWins = (Integer.parseInt(whiteWins) + 1).toString()
+                                } else if (winner == 2) {
+                                    blackWins = (Integer.parseInt(blackWins) + 1).toString()
+                                }
+
+                                db?.execSQL("UPDATE statistics SET games_played = $gamesPlayed, white_wins=$whiteWins, black_wins=$blackWins, draws=$draws")
+                                Log.d(TAG, "$gamesPlayed $whiteWins $blackWins $draws")
                             }
                         }
 

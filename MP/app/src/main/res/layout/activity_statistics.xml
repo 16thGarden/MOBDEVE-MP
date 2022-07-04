@@ -38,6 +38,7 @@
 			/>
 
 		<TextView
+			android:id="@+id/games_played"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:textSize="20sp"
@@ -52,14 +53,109 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
+		android:layout_marginStart="20dp"
+		android:layout_marginEnd="20dp"
+		android:layout_marginBottom="10dp"
+		>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="20sp"
+			android:text="White Wins: "
+			android:layout_gravity="left"
+			/>
+
+		<TextView
+			android:id="@+id/white_wins"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textSize="20sp"
+			android:text="0"
+			android:layout_weight="1"
+			android:gravity="right"
+			/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:layout_marginStart="20dp"
+		android:layout_marginEnd="20dp"
+		android:layout_marginBottom="10dp"
+		>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="20sp"
+			android:text="Black Wins: "
+			android:layout_gravity="left"
+			/>
+
+		<TextView
+			android:id="@+id/black_wins"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textSize="20sp"
+			android:text="0"
+			android:layout_weight="1"
+			android:gravity="right"
+			/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:layout_marginStart="20dp"
+		android:layout_marginEnd="20dp"
+		android:layout_marginBottom="10dp"
+		>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="20sp"
+			android:text="Draws: "
+			android:layout_gravity="left"
+			/>
+
+		<TextView
+			android:id="@+id/draws"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textSize="20sp"
+			android:text="0"
+			android:layout_weight="1"
+			android:gravity="right"
+			/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
 		android:gravity="center"
 		android:layout_marginTop="20dp"
 		>
 
 		<Button
+			android:id="@+id/reset_statistics"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Reset Statistics"
+			/>
+
+		<TextView
+			android:id="@+id/confirm"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
 			/>
 
 	</LinearLayout>
