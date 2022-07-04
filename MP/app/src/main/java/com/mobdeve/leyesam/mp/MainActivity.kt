@@ -22,18 +22,12 @@ class MainActivity : AppCompatActivity() {
 
         val helper = MyDBHelper(applicationContext)
         val db = helper.readableDatabase
-        db.execSQL("DELETE FROM statistics")
-        db.execSQL("INSERT INTO statistics VALUES (12, 2, 4, 6)")
+        //db.execSQL("DELETE FROM statistics")
+        //db.execSQL("INSERT INTO statistics VALUES (0, 0, 0, 0)")
 
         binding.startGame.setOnClickListener{view: View? ->
             val goToCard = Intent(this, GameActivity::class.java)
             goToCard.putExtra("type", "new")
-            startActivity(goToCard)
-        }
-
-        binding.continueGame.setOnClickListener{view: View? ->
-            val goToCard = Intent(this, GameActivity::class.java)
-            goToCard.putExtra("type", "continue")
             startActivity(goToCard)
         }
 

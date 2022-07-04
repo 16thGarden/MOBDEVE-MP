@@ -48,6 +48,7 @@ class CheckersView(context: Context?, attrs: AttributeSet?) : View(context, attr
 
     fun setBoard(board: Array<IntArray>) {
         this.board = board
+        invalidate()
     }
     fun setTitle(title: TextView) {
         this.title = title

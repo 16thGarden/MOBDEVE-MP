@@ -32,16 +32,6 @@
 		app:layout_constraintTop_toBottomOf="@+id/title" />
 
 	<Button
-		android:id="@+id/continue_game"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-
-		android:text="Continue Game"
-
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/start_game" />
-
-	<Button
 		android:id="@+id/view_statistics"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

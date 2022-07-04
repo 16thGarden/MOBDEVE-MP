@@ -1,8 +1,8 @@
 package com.mobdeve.leyesam.mp
 
-import android.app.ActionBar
 import android.os.Bundle
-import android.util.DisplayMetrics
+import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.mobdeve.leyesam.mp.databinding.ActivityGameBinding
@@ -44,6 +44,16 @@ class GameActivity : AppCompatActivity() {
         val row7 = intArrayOf(0, 1, 0, 1, 0, 1, 0, 1)
         val row8 = intArrayOf(1, 0, 1, 0, 1, 0, 1, 0)
         val board = arrayOf(row1, row2, row3, row4, row5, row6, row7, row8)
+
+        val row1new = intArrayOf(0, 2, 0, 2, 0, 2, 0, 2)
+        val row2new = intArrayOf(2, 0, 2, 0, 2, 0, 2, 0)
+        val row3new = intArrayOf(0, 2, 0, 2, 0, 2, 0, 2)
+        val row4new = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0)
+        val row5new = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0)
+        val row6new = intArrayOf(1, 0, 1, 0, 1, 0, 1, 0)
+        val row7new = intArrayOf(0, 1, 0, 1, 0, 1, 0, 1)
+        val row8new = intArrayOf(1, 0, 1, 0, 1, 0, 1, 0)
+        val boardnew = arrayOf(row1, row2, row3, row4, row5, row6, row7, row8)
 
         // test white wins
         /*
@@ -91,5 +101,11 @@ class GameActivity : AppCompatActivity() {
         var helper = MyDBHelper(applicationContext)
         var db = helper.readableDatabase
         checkersView.setDB(db)
+
+        binding.newGame.setOnClickListener{view: View ->
+            val intent = intent
+            finish()
+            startActivity(intent)
+        }
     }
 }
